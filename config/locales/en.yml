@@ -30,4 +30,7 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  notice:
+    auth:
+      sign_in: You are successfully logged in
+      not_authorized: You are not authorized to perform this action.

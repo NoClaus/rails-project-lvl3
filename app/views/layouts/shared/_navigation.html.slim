@@ -1,0 +1,19 @@
+nav.navbar.navbar-static-top.navbar-expand-md
+  .container
+    button.navbar-toggler.collapsed[type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"]
+      span.sr-only Toggle navigation
+    = link_to root_path, class: 'navbar-brand link-dark' do
+      = t('.logo')
+    #bs-example-navbar-collapse-1.collapse.navbar-collapse
+      / ul.nav.navbar-nav.me-auto
+      /   li.nav-item
+      /     = link_to t('.posts'), root_path, class: 'nav-link'
+      ul.nav.navbar-nav.ms-auto
+        - if user_signed_in?
+          li.nav-item
+            = link_to t('actions.sign_out'), destroy_user_session_path, method: :delete, class: 'nav-link link-dark'
+        - else
+          li.nav-item
+            = link_to t('actions.sign_in'), auth_request_path('github'), method: :post, class: 'nav-link link-dark'
+.container
+  hr.w-100.border-1.border-top.border-dark.mt-1
