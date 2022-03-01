@@ -1,0 +1,9 @@
+= render '/web/shared/page_title', title: @bulletin.name
+
+.row
+  .col-md-6
+    = image_tag @bulletin.photo, class: 'img-thumbnail mb-4'
+    p= @bulletin.description
+  .col-md-6
+    .card.card-body
+      = @bulletin.author.full_name

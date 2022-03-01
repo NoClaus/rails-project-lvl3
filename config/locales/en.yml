@@ -30,6 +30,16 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  layouts:
+    shared:
+      navigation:
+        logo: Bulletin Board
+        bulletins: Bulletins
+        add_bulletin: Add Bulletin
+  actions:
+    cancel: Cancel
+    save: Save
+    sign_in: Sign In
   notice:
     auth:
       sign_in: You are successfully logged in

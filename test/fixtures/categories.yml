@@ -1,9 +1,10 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  email: one@gmail.com
-  name: Jack Sparrow
+  name: Category 1
 
 two:
-  email: two@gmail.com
-  name: Harley Quinn
+  name: Category 2
+
+three:
+  name: Category 3
