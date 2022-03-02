@@ -9,5 +9,12 @@ Rails.application.routes.draw do
     get 'auth/:provider/callback', to: 'auth#callback', as: :callback_auth
     
     resources :bulletins
+    
+    namespace 'admin', as: 'admin' do
+      root 'bulletins#index'
+      resources :bulletins, only: %i[index edit delete show]
+      resources :categories, only: %i[index edit delete show]
+      resources :users, only: %i[index edit delete show]
+    end
   end
 end

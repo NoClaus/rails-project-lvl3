@@ -44,3 +44,9 @@ en:
     auth:
       sign_in: You are successfully logged in
       not_authorized: You are not authorized to perform this action.
+  web:
+    home:
+      index:
+        title: Bulletins
+      new:
+        title: Add bulletin
