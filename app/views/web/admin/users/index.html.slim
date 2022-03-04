@@ -1,33 +1,46 @@
-.row
-  .col-md-3.col-lg-2
-    ul.nav.flex-column.nav-pills.text-center.text-md-start.me-3
-      li.nav-item
-        = link_to 'Bulletins', admin_bulletins_path, class: 'nav-link'
-      li.nav-item
-        = link_to 'Categories', admin_categories_path, class: 'nav-link'
-      li.nav-item
-        = link_to 'Users', admin_users_path, class: 'nav-link active'
-  .col-md-9.col-lg-10
-    h1 Users
-    table.table
-      thead
-        tr
-          th(scope="col") ID
-          th(scope="col") Email
-          th(scope="col") First Name
-          th(scope="col") Last Name
-          th(scope="col") Admin
-          th.text-end(scope="col") Actions
-      tbody
-        - @users.each do |user|
-          tr
-            th(scope="row")= user.id
-            td= user.email
-            td= user.first_name
-            td= user.last_name
-            td
-              - if user.admin?
-                span.badge.rounded-pill.bg-danger Admin
-            td.d-flex.gap-1.justify-content-end
-              = link_to t('actions.edit'), edit_admin_user_path(user), class: 'btn btn-sm btn-primary'
-              = link_to t('actions.delete'), admin_user_path(user), method: :delete, class: 'btn btn-sm btn-danger'
+- content_for :heading do
+  = t('.heading')
+
+hr
+
+= search_form_for [:admin, @q], html: { class: 'row row-cols-4' } do |f|
+  = f.input :email_cont,
+            label: t('.email_cont')
+  = f.input :first_name_or_last_name_cont,
+            label: t('.name_cont_label'),
+            placeholder: t('.name_cont_placeholder')
+  .col-auto.d-flex.mb-3
+    .mt-auto
+      = f.button :submit, class: 'btn btn-outline-secondary me-3'
+      = link_to t('reset'), url_for, class: 'btn btn-secondary me-3'
+
+hr
+
+table.table
+  thead
+    tr
+      th= sort_link(@q, 'id')
+      th= sort_link(@q, 'email')
+      th= sort_link(@q, 'first_name')
+      th= sort_link(@q, 'last_name')
+      th= sort_link(@q, 'admin')
+      th= sort_link(@q, 'created_at')
+      th
+  tbody
+    - @users.each do |user|
+      tr
+        td= link_to user.id, edit_admin_user_path(user)
+        td= user.email
+        td= user.first_name
+        td= user.last_name
+        td= user.admin?
+        td= l user.created_at
+        td= link_to t(:delete),
+            admin_user_path(user),
+            method: :delete,
+            data: { confirm: t(:destroy_confirmation) },
+            class: 'link-danger'
+  tfoot
+    tr
+      td colspan=7
+        = paginate @users

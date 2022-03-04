@@ -1,0 +1,50 @@
+en:
+  web:
+    admin:
+      categories:
+        index:
+          heading: Categories
+          name_cont: Find by name
+        new:
+          heading: Create category
+        edit:
+          heading: Update category
+        create:
+          success: Category was created
+        update:
+          success: Category was updated
+        destroy:
+          success: Category was deleted
+      bulletins:
+        index:
+          heading: Bulletins
+          title_cont: Find by title
+          email_cont: Find by author email
+          category_cont: Find by category
+          state_cont: Find by status
+        edit:
+          heading: Update bulletin
+        update:
+          success: Bulletin was updated
+          failed: Cannot updated bulletin
+        publish:
+          success: Bulletin was published
+          failed: Cannot publish bulletin
+        reject:
+          success: Bulletin was rejected
+          failed: Cannot reject bulletin
+        archive:
+          success: Bulletin was archived
+          failed: Cannot archive bulletin
+      users:
+        index:
+          heading: Users
+          email_cont: Find by email
+          name_cont_label: Find by name
+          name_cont_placeholder: Enter first name or last name
+        edit:
+          heading: Update user info
+        update:
+          success: User was updated
+        destroy:
+          success: User was deleted

@@ -1,0 +1,38 @@
+- content_for :heading do
+  = t('.heading')
+
+hr
+.mb-3
+  = render partial: 'web/shared/status_badge', locals: { state: @bulletin.aasm(:state) }
+
+= simple_form_for [:admin, @bulletin] do |f|
+  = f.input :title
+  = f.input :description, input_html: { rows: 10 }
+  = f.association :category, prompt: :translate, input_html: { class: 'form-select' }
+  = f.input :photo, as: :file
+  - if @bulletin.photo_attachment
+    = image_tag @bulletin.photo.variant(resize_to_limit: [200, 100]), class: 'img-thumbnail mt-2'
+  hr
+  - if policy(@bulletin).publish?
+    = link_to t(:publish),
+              publish_admin_bulletin_path(@bulletin),
+              method: :patch,
+              class: 'btn btn-success me-2'
+
+  - if policy(@bulletin).reject?
+    = link_to t(:reject),
+              reject_admin_bulletin_path(@bulletin),
+              method: :patch,
+              class: 'btn btn-danger me-2'
+
+  - if !@bulletin.archived?
+    = f.button :submit, class: 'btn btn-primary me-2'
+
+  - if policy(@bulletin).archive?
+    = link_to t(:archive),
+              archive_admin_bulletin_path(@bulletin),
+              method: :patch,
+              data: { confirm: t(:archive_confirmation) },
+              class: 'btn btn-outline-danger me-2'
+
+  = link_to t(:back), :back, class: 'btn btn-outline-secondary me-2'

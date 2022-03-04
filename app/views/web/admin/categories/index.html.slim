@@ -1,25 +1,37 @@
-.row
-  .col-md-3.col-lg-2
-    ul.nav.flex-column.nav-pills.text-center.text-md-start.me-3
-      li.nav-item
-        = link_to 'Bulletins', admin_bulletins_path, class: 'nav-link'
-      li.nav-item
-        = link_to 'Categories', admin_categories_path, class: 'nav-link active'
-      li.nav-item
-        = link_to 'Users', admin_users_path, class: 'nav-link'
-  .col-md-9.col-lg-10
-    h1 Categories
-    table.table
-      thead
-        tr
-          th(scope="col") ID
-          th(scope="col") Name
-          th.text-end(scope="col") Actions
-      tbody
-        - @categories.each do |category|
-          tr
-            th(scope="row")= category.id
-            td= category.name
-            td.d-flex.gap-1.justify-content-end
-              = link_to t('actions.edit'), edit_admin_category_path(category), class: 'btn btn-sm btn-primary'
-              = link_to t('actions.delete'), admin_category_path(category), method: :delete, class: 'btn btn-sm btn-danger'
+- content_for :heading do
+  = t('.heading')
+
+= link_to t(:new), new_admin_category_path, class: 'btn btn-primary'
+
+hr
+
+= search_form_for [:admin, @q], html: { class: 'row row-cols-4' } do |f|
+  = f.input :name_cont, label: t('.name_cont')
+  .col-auto.d-flex.mb-3
+    .mt-auto
+      = f.button :submit, t(:search), class: 'btn btn-outline-secondary me-3'
+      = link_to t(:reset), url_for, class: 'btn btn-secondary me-3'
+
+hr
+
+table.table
+  thead
+    tr
+      th= sort_link(@q, 'id')
+      th= sort_link(@q, 'name')
+      th= sort_link(@q, 'created_at')
+      th
+  tbody
+    - @categories.each do |category|
+      tr
+        td= link_to category.id, edit_admin_category_path(category)
+        td= category.name
+        td= l category.created_at
+        td= link_to t(:destroy), admin_category_path(category),
+                                 method: :delete,
+                                 data: { confirm: t(:destroy_confirmation) },
+                                 class: 'link-danger'
+  tfoot
+    tr
+      td colspan=4
+        = paginate @categories

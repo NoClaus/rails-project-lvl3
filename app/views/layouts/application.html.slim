@@ -1,19 +1,12 @@
 doctype html
 html
   head
-    title
-      = content_for?(:title) ? yield(:title) : 'Bulletin'
-    meta[name="viewport" content="width=device-width,initial-scale=1"]
-    = csrf_meta_tags
-    = csp_meta_tag
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-  body.bg-light
-    header
-      = render 'layouts/shared/navigation'
-    = render 'layouts/shared/flash'
-    main.my-5[role="main"]
+    = render 'layouts/shared/head'
+  body.d-flex.flex-column.h-100
+    = render "layouts/shared/navigation"
+    = render "layouts/shared/flash"
+    main.mt-sm-2.mb-2.pb-2
       .container
-        .card.p-5.card-body.border-0.shadow
-          = content_for?(:content) ? yield(:content) : yield
+        - if content_for?(:heading)
+          h1.mb-4= yield :heading
+        = yield

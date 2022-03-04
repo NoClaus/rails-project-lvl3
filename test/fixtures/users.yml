@@ -1,9 +1,19 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+DEFAULTS: &DEFAULTS
+  admin: false
+  email: $LABEL@test.io
+  first_name: First name $LABEL
+  last_name: Last name $LABEL
 
 one:
-  email: one@gmail.com
-  name: Jack Sparrow
+  <<: *DEFAULTS
 
 two:
-  email: two@gmail.com
-  name: Harley Quinn
+  <<: *DEFAULTS
+
+three:
+  <<: *DEFAULTS
+
+admin:
+  <<: *DEFAULTS
+  admin: true

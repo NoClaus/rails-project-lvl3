@@ -33,7 +33,9 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails'
+  gem 'factory_bot_rails'
   gem 'faker'
+  gem 'rubocop'
   gem 'rubocop-performance'
   gem 'rubocop-rails'
   gem 'slim_lint'
@@ -65,9 +67,13 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'aasm'
 gem 'active_storage_validations'
+gem 'aws-sdk-s3'
+gem 'kaminari'
 gem 'omniauth-github'
 gem 'omniauth-rails_csrf_protection'
+gem 'pg'
 gem 'pundit'
+gem 'ransack'
 gem 'rollbar'
 gem 'simple_form'
 gem 'slim-rails'

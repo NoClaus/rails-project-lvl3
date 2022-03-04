@@ -1,3 +1,8 @@
-= render '/web/shared/page_title', title: t('.title')
+= render "search_form"
 
-= render 'form', bulletin: @bulletin
+hr
+
+.row.row-cols-1.g-4
+  = render @bulletins
+
+  = paginate @bulletins

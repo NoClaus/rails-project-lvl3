@@ -1,0 +1,57 @@
+h5= t('.my_bulletins')
+
+hr
+
+= search_form_for @q, html: { class: 'row row-cols-4' }, url: profile_path(@user) do |f|
+  = f.input :title_cont,
+            label: t('.title_cont')
+  = f.input :state_cont,
+            collection: @states,
+            label: t('.state_cont'),
+            input_html: { class: 'form-select form-control-sm' }
+  = f.input :category_name_cont,
+            collection: @categories,
+            value_method: :name,
+            label: t('.category_cont'),
+            input_html: { class: 'form-select form-control-sm' }
+  .col-auto.d-flex.mb-3
+    .mt-auto
+      = f.button :submit, t(:search), class: 'btn btn-outline-secondary me-3'
+      = link_to t(:reset), url_for, class: 'btn btn-secondary me-3'
+
+table.table
+  thead
+    tr.d-flex
+      th.col-2= sort_link(@q, 'title')
+      th.col-2= sort_link(@q, 'category')
+      th.col-2= sort_link(@q, 'state')
+      th.col-3= sort_link(@q, 'created_at')
+      th.col-3
+  tbody
+    - @bulletins.each do |bulletin|
+      tr.d-flex
+        td.col-2
+          .text-truncate= bulletin.title
+        td.col-2
+          .text-truncate= bulletin.category.name
+        td.col-2
+          = render partial: 'web/shared/status_badge', locals: { state: bulletin.aasm(:state) }
+        td.col-3= l(bulletin.created_at)
+        td.col-3
+          = link_to t(:show),
+                    bulletin_path(bulletin),
+                    class: 'me-2'
+          - if policy(bulletin).edit?
+            = link_to t(:edit),
+                      edit_bulletin_path(bulletin),
+                      class: 'me-2'
+          - if policy(bulletin).archive?
+            = link_to t(:archive),
+                      archive_bulletin_path(bulletin),
+                      method: :patch,
+                      data: { confirm: t(:archive_confirmation) },
+                      class: 'link-danger'
+  tfoot
+    tr
+      td colspan=4
+        = paginate @bulletins

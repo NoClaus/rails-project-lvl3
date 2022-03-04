@@ -1,0 +1,27 @@
+en:
+  web:
+    users:
+      profiles:
+        bulletins:
+          title_cont: Find by title
+          state_cont: Find by status
+          category_cont: Find by category
+        show:
+          heading: Profile
+          email: Email
+          first_name: First name
+          last_name: Last name
+          my_bulletins: My bulletins
+          name: Find by name
+          state: Find by status
+          category: Find by category
+          update_profile: Update info
+        new:
+          heading: Registration
+          sign_up: Sign up
+        edit:
+          heading: Update info
+        update:
+          success: Info was updated
+        destroy:
+          success: User was destroyed

@@ -1,0 +1,16 @@
+en:
+  ransack:
+    search: Search
+    reset: Reset
+    attributes:
+      bulletin:
+        id: ID
+        name: Name
+        user_email: Email
+        category_name: Category
+        state: Status
+        created_at: Created at
+      category:
+        id: ID
+        name: Name
+        created_at: Created at

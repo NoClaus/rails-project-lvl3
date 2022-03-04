@@ -1,25 +1,67 @@
-.row
-  .col-md-3.col-lg-2
-    ul.nav.flex-column.nav-pills.text-center.text-md-start.me-3
-      li.nav-item
-        = link_to 'Bulletins', admin_bulletins_path, class: 'nav-link active'
-      li.nav-item
-        = link_to 'Categories', admin_categories_path, class: 'nav-link'
-      li.nav-item
-        = link_to 'Users', admin_users_path, class: 'nav-link'
-  .col-md-9.col-lg-10
-    h1 Bulletins
-    table.table
-      thead
-        tr
-          th(scope="col") ID
-          th(scope="col") Name
-          th.text-end(scope="col") Actions
-      tbody
-        - @bulletins.each do |bulletin|
-          tr
-            th(scope="row")= bulletin.id
-            td= bulletin.name
-            td.d-flex.gap-1.justify-content-end
-              = link_to t('actions.edit'), edit_admin_bulletin_path(bulletin), class: 'btn btn-sm btn-primary'
-              = link_to t('actions.delete'), admin_bulletin_path(bulletin), method: :delete, class: 'btn btn-sm btn-danger'
+- content_for :heading do
+  = t('.heading')
+
+hr
+
+= search_form_for [:admin, @q], html: { class: 'row row-cols-4' } do |f|
+  = f.input :title_cont,
+            label: t('.title_cont')
+  = f.input :user_email_cont,
+            label: t('.email_cont')
+  = f.input :category_name_cont,
+            collection: @categories,
+            value_method: :name,
+            label: t('.category_cont'),
+            input_html: { class: 'form-select' }
+  = f.input :state_cont,
+            collection: @states,
+            label_method: :human_name,
+            label: t('.state_cont'),
+            input_html: { class: 'form-select' }
+  .col-auto.d-flex.mb-3
+    .mt-auto
+      = f.button :submit, class: 'btn btn-outline-secondary me-3'
+      = link_to t(:reset), url_for, class: 'btn btn-secondary me-3'
+
+hr
+
+table.table
+  thead
+    tr
+      th= sort_link(@q, 'id')
+      th= sort_link(@q, 'title')
+      th= sort_link(@q, 'user_email')
+      th= sort_link(@q, 'category_name')
+      th= sort_link(@q, 'state')
+      th= sort_link(@q, 'created_at')
+      th
+  tbody
+    - @bulletins.each do |bulletin|
+      tr
+        td= link_to bulletin.id, edit_admin_bulletin_path(bulletin)
+        td= bulletin.title
+        td= link_to bulletin.user.email, edit_admin_user_path(bulletin.user)
+        td= bulletin.category.name
+        td= render partial: 'web/shared/status_badge', locals: { state: bulletin.aasm(:state) }
+        td= l(bulletin.created_at)
+        td
+          - if policy(bulletin).publish?
+            = link_to t(:publish),
+                      publish_admin_bulletin_path(bulletin),
+                      method: :patch,
+                      class: 'link-success me-2'
+          - if policy(bulletin).reject?
+            = link_to t(:reject),
+                      reject_admin_bulletin_path(bulletin),
+                      method: :patch,
+                      class: 'link-danger me-2'
+          - if policy(bulletin).archive?
+            = link_to t(:archive),
+                      archive_admin_bulletin_path(bulletin),
+                      method: :patch,
+                      data: { confirm: t(:archive_confirmation) },
+                      class: 'link-danger'
+  tfoot
+    tr
+      td colspan=6
+        = paginate @bulletins

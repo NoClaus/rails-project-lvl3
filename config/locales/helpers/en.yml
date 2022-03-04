@@ -1,0 +1,7 @@
+en:
+  helpers:
+    submit:
+      user:
+        update: Save
+      bulletin:
+        update: Save

@@ -1,0 +1,31 @@
+en:
+  web:
+    bulletins:
+      search_form:
+        sort_by: Sort by
+        title_cont: Find by title
+        author_cont_label: Find by author
+        author_cont_placeholder: Enter first name, last name or email
+        category_cont: Find by category
+      form:
+        moderate: Send to moderation
+        make_draft: Save as draft
+      bulletin:
+        author: Author
+      show:
+        description: Description
+        category: Category
+        user: Author
+        created_at: Created at
+      edit:
+        heading: Update bulletin
+      new:
+        heading: Create bulletin
+      create:
+        success: Post was created
+      update:
+        success: Post was updated
+      send_to_moderate:
+        success: Post was sent to moderation
+      archive:
+        success: Post was archived

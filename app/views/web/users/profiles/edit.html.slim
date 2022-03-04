@@ -1,0 +1,10 @@
+.row.gx-4.gx-lg-5.justify-content-center
+  .col-sm-9
+    h1.mb-4= t('.heading')
+
+    = simple_form_for @user, url: profile_path do |f|
+      = f.input :email
+      = f.input :first_name
+      = f.input :last_name
+      = f.button :submit, class: 'btn-outline-primary me-2'
+      = link_to t(:back), :back, class: 'btn btn-outline-secondary'
