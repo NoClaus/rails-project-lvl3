@@ -2,23 +2,23 @@
   .col-sm-10
     .row.gx-4
       .col-8
-        h2.mb-4= @bulletin.title
+        h2.mb-4 = @bulletin.title
         dl.row
           - if author_or_admin? @bulletin
             dt.col-sm-3.mb-4 #{t('.state')}:
-            dd.col-sm-9.mb-4= render partial: 'web/shared/status_badge', locals: { state: @bulletin.aasm(:state) }
+            dd.col-sm-9.mb-4 = render partial: 'web/shared/status_badge', locals: { state: @bulletin.aasm(:state) }
 
           dt.col-sm-3.mb-4 #{t('.description')}:
-          dd.col-sm-9.mb-4= @bulletin.description
+          dd.col-sm-9.mb-4 = @bulletin.description
 
           dt.col-sm-3.mb-4 #{t('.category')}:
-          dd.col-sm-9.mb-4= @bulletin.category.name
+          dd.col-sm-9.mb-4 = @bulletin.category.name
 
           dt.col-sm-3.mb-4 #{t('.user')}:
-          dd.col-sm-9.mb-4= full_name_or_email(@bulletin.user)
+          dd.col-sm-9.mb-4 = full_name_or_email(@bulletin.user)
 
           dt.col-sm-3.mb-4 #{t('.created_at')}:
-          dd.col-sm-9.mb-4= l @bulletin.created_at
+          dd.col-sm-9.mb-4 = l @bulletin.created_at
       .col-4
         - if @bulletin.photo_attachment
           = image_tag(@bulletin.photo, class: 'img-thumbnail img-fluid')

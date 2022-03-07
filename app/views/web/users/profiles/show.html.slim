@@ -4,14 +4,14 @@
 .row
   .col-sm-4
     dl.row
-      dt.col-sm-4.mb-2= t('.email')
-      dd.col-sm-8.mb-2= @user.email
+      dt.col-sm-4.mb-2 = t('.email')
+      dd.col-sm-8.mb-2 = @user.email
 
-      dt.col-sm-4.mb-2= t('.first_name')
-      dd.col-sm-8.mb-2= @user.first_name
+      dt.col-sm-4.mb-2 = t('.first_name')
+      dd.col-sm-8.mb-2 = @user.first_name
 
-      dt.col-sm-4.mb-2= t('.last_name')
-      dd.col-sm-8.mb-2= @user.last_name
+      dt.col-sm-4.mb-2 = t('.last_name')
+      dd.col-sm-8.mb-2 = @user.last_name
 
     - if policy(@user).edit?
       = link_to t('.update_profile'), edit_profile_path

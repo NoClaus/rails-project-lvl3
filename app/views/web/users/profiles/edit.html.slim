@@ -1,6 +1,6 @@
 .row.gx-4.gx-lg-5.justify-content-center
   .col-sm-9
-    h1.mb-4= t('.heading')
+    h1.mb-4 = t('.heading')
 
     = simple_form_for @user, url: profile_path do |f|
       = f.input :email

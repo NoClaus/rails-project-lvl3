@@ -1,4 +1,4 @@
-h5= t('.my_bulletins')
+h5 = t('.my_bulletins')
 
 hr
 
@@ -22,21 +22,21 @@ hr
 table.table
   thead
     tr.d-flex
-      th.col-2= sort_link(@q, 'title')
-      th.col-2= sort_link(@q, 'category')
-      th.col-2= sort_link(@q, 'state')
-      th.col-3= sort_link(@q, 'created_at')
+      th.col-2 = sort_link(@q, 'title')
+      th.col-2 = sort_link(@q, 'category')
+      th.col-2 = sort_link(@q, 'state')
+      th.col-3 = sort_link(@q, 'created_at')
       th.col-3
   tbody
     - @bulletins.each do |bulletin|
       tr.d-flex
         td.col-2
-          .text-truncate= bulletin.title
+          .text-truncate = bulletin.title
         td.col-2
-          .text-truncate= bulletin.category.name
+          .text-truncate = bulletin.category.name
         td.col-2
           = render partial: 'web/shared/status_badge', locals: { state: bulletin.aasm(:state) }
-        td.col-3= l(bulletin.created_at)
+        td.col-3 = l(bulletin.created_at)
         td.col-3
           = link_to t(:show),
                     bulletin_path(bulletin),

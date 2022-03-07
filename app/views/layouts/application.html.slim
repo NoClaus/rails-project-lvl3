@@ -3,10 +3,10 @@ html
   head
     = render 'layouts/shared/head'
   body.d-flex.flex-column.h-100
-    = render "layouts/shared/navigation"
-    = render "layouts/shared/flash"
+    = render 'layouts/shared/navigation'
+    = render 'layouts/shared/flash'
     main.mt-sm-2.mb-2.pb-2
       .container
         - if content_for?(:heading)
-          h1.mb-4= yield :heading
+          h1.mb-4 = yield :heading
         = yield
