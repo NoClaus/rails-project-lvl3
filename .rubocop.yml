@@ -1,6 +1,7 @@
 ---
 
 require:
+  - rubocop-performance
   - rubocop-rails
 
 AllCops:
@@ -16,6 +17,10 @@ AllCops:
   - 'vendor/**/*'
   - 'node_modules/**/*'
   - 'tmp/**/*'
+
+
+Rails:
+  Enabled: true
 
 Style/ClassAndModuleChildren:
   Enabled: false
@@ -39,4 +44,10 @@ Metrics/BlockLength:
   Enabled: false
 
 Style/AsciiComments:
+  Enabled: false
+
+Metrics/ParameterLists:
+  Enabled: false
+  
+Style/NegatedIf:
   Enabled: false
