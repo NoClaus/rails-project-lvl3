@@ -25,3 +25,6 @@ lint-code:
 
 test:
 	bundle exec rails test
+	
+prepare-env:
+	cp .env.example .env
