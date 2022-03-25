@@ -1,23 +1,27 @@
-ARGS = $(filter-out $@,$(MAKECMDGOALS))
-%:
-	@:
-
 install:
 	bundle install
+	yarn install
 
-setup:
-	bin/setup
-	bin/rails db:fixtures:load
+db-drop:
+	bundle exec rails db:drop
 
-start:
-	rm -rf tmp/pids/server.pid
-	bundle exec rails s -b '0.0.0.0' -p 5000
+db-migrate:
+	bundle exec rails db:migrate
 
-lint:
+db-setup:
+	bundle exec rails db:create db:migrate db:seed
+
+db-reset:
+	bundle exec rails db:drop db:create db:migrate db:seed
+
+console:
+	bundle exec rails console
+	
+lint: lint-code
+
+lint-code:
 	bundle exec rubocop
-
-lint-fix:
-	bundle exec rubocop --auto-correct
+	bundle exec slim-lint app/views/
 
 test:
-	bin/rails test $(ARGS)
+	bundle exec rails test
