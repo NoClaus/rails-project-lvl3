@@ -4,10 +4,6 @@
   = f.association :category, prompt: :translate, input_html: { class: 'form-select' }, class: 'form-group mb-3'
   .form-group.mb-3
     = f.file_field :photo, class: 'form-control'
-  .form-group.mb-3
-    - if @bulletin.photo.attached?
-      = image_tag @bulletin.photo.variant(resize_to_limit: [200, 100]), class: 'img-thumbnail img-fluid mt-2'
-  hr
   .mt-2
     = f.button :submit, class: 'btn-outline-primary me-2'
     - if @bulletin.may_make_draft?

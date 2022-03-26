@@ -9,9 +9,8 @@ hr
   = f.input :title, class: 'form-group mb-3'
   = f.input :description, input_html: { rows: 10 }, class: 'form-group mb-3'
   = f.association :category, prompt: :translate, input_html: { class: 'form-select' }
-  = f.file_field :photo, class: 'form-control'
-  - if @bulletin.photo_attachment
-    = image_tag @bulletin.photo.variant(resize_to_limit: [200, 100]), class: 'img-thumbnail mt-2'
+  .form-group.mb-3
+    = f.file_field :photo, class: 'form-control'
   hr
   - if policy(@bulletin).publish?
     = link_to t(:publish),
