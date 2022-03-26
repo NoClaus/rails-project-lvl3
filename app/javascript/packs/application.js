@@ -10,7 +10,6 @@ import "channels"
 import 'bootstrap/js/src/collapse';
 import 'bootstrap/js/src/dropdown';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-require("stylesheets/application.scss")
 
 Rails.start()
 Turbolinks.start()
